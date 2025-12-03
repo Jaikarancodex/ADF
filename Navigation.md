@@ -316,18 +316,18 @@ When ADF Studio opens you’ll see a left-side vertical menu and a top bar. Prim
 
 ##  🎯 1.10 Debug, Monitor & Publish
 
-➡️ 1. Click **Debug** → enter parameters:
+1. ➡️ Click **Debug** → enter parameters:
 
    * SourceFolder: (blank)
    * SourceFile: `studentpracticecsvadls.csv`
    * TargetFile: `output_student.csv`
-➡️ 2. Click **OK** and wait for the run.
-➡️ 3. Monitor: left rail → **Monitor** → open the latest pipeline run → click activities to view **Input/Output** JSON.
+2. ➡️ Click **OK** and wait for the run.
+3. ➡️ Monitor: left rail → **Monitor** → open the latest pipeline run → click activities to view **Input/Output** JSON.
 
    * Check `GetMeta_CheckFile` output: `exists: true`, `size: <number>`.
    * Check `Copy_To_Sink` output for `rowsRead` / `rowsCopied`.
 4. Verify sink file exists: Storage Account `practice2sa` → Container `praccontainer` → Folder `output` → `output_student.csv`.⚡
-✅ 5. If success → Author pane → top-right **Publish All**.
+5. ✅ If success → Author pane → top-right **Publish All**.
 
 ---
 
