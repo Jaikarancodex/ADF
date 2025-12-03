@@ -1,4 +1,4 @@
-# 📝 ADF — UI Navigation Cheatsheet 💡
+# 📝 ADF — UI Navigation💡
 
 A focused, step‑by‑step **UI walkthrough** (click-by-click). Use this as a quick reference while you work inside the Azure Portal and ADF Studio.
 
