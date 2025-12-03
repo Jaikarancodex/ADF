@@ -49,11 +49,11 @@ When ADF Studio opens you’ll see a left-side vertical menu and a top bar. Prim
 
 ## 🎯 4. Authoring — Create Linked Service (Storage connection)
 
-⭐ 1. Author view → top-left area shows **Factory Resources** (Pipelines, Datasets, Data flows, etc.).
-⭐ 2. Click the **Manage** icon (gear) on the left to open Manage view.
-⭐ 3. Under Manage → **Linked services** → click **+ New**.
-⭐ 4. Select **Azure Blob Storage** or **Azure Data Lake Storage Gen2**.
-⭐ 5. Choose authentication (for learning: **Account key**) → select the Storage Account from the dropdown or paste details → click **Test connection** → **Create**.
+1. ⭐ Author view → top-left area shows **Factory Resources** (Pipelines, Datasets, Data flows, etc.).
+2. ⭐ Click the **Manage** icon (gear) on the left to open Manage view.
+3. ⭐ Under Manage → **Linked services** → click **+ New**.
+4. ⭐ Select **Azure Blob Storage** or **Azure Data Lake Storage Gen2**.
+5. ⭐ Choose authentication (for learning: **Account key**) → select the Storage Account from the dropdown or paste details → click **Test connection** → **Create**.
 
 📕 **Note:** Linked Service stores connection and auth; datasets reference a linked service.
 
@@ -212,7 +212,7 @@ When ADF Studio opens you’ll see a left-side vertical menu and a top bar. Prim
 2. Under **Factory Resources** → **Datasets** → click **+** → **Dataset**.
 3. Choose **Azure Data Lake Storage Gen2** → Format **DelimitedText** → **Continue**.
 4. **Name**: `ds_studentpractice` → Click **OK**.
-⭐ 5. In **Connection**:
+5. ⭐ In **Connection**:
 
    * Linked service: `LS_practice2sa`
    * Container: `praccontainer`
@@ -228,7 +228,7 @@ When ADF Studio opens you’ll see a left-side vertical menu and a top bar. Prim
 
 1. In **Author** → under **Pipelines** click **+** → **Pipeline**.
 2. Rename pipeline to `PL_DynamicCopy`.
-⭐ 3. On the pipeline properties pane click **Parameters** → **+ New** three times and create:
+3. ⭐ On the pipeline properties pane click **Parameters** → **+ New** three times and create:
 
    * `SourceFolder` (String)
    * `SourceFile` (String)
@@ -246,7 +246,7 @@ When ADF Studio opens you’ll see a left-side vertical menu and a top bar. Prim
 
 1. From the Activities toolbox expand **General** → drag **Get Metadata** onto the canvas.
 2. Rename to `GetMeta_CheckFile` (click activity → General tab → rename).
-⭐ 3. Settings tab:
+3. ⭐ Settings tab:
 
    * Dataset: `ds_studentpractice` (no dataset params if dataset pointed to the file directly)
    * Field list: add `exists`, `size`, `lastModified`.
@@ -258,7 +258,7 @@ When ADF Studio opens you’ll see a left-side vertical menu and a top bar. Prim
 1. From toolbox → **Iteration & conditionals** → drag **If Condition** to the canvas to the right of the Get Metadata.
 2. Connect `GetMeta_CheckFile` → drag green arrow to the `If Condition` (creates dependency).
 3. Select the If Condition activity and rename to `If_FileExists`.
-⭐ 4. Settings → Expression → Add dynamic content:
+4. ⭐ Settings → Expression → Add dynamic content:
 
 ```
 @activity('GetMeta_CheckFile').output.exists
@@ -271,7 +271,7 @@ When ADF Studio opens you’ll see a left-side vertical menu and a top bar. Prim
 1. Author → Datasets → + → Azure Data Lake Storage Gen2 → DelimitedText → Continue.
 2. Name: `ds_student_sink` → OK.
 3. Parameters tab: add parameter `TargetFile` (String).
-⭐ 4. Connection tab:
+4. ⭐ Connection tab:
 
    * Linked service: `LS_practice2sa`
    * Container: `praccontainer`
@@ -287,7 +287,7 @@ When ADF Studio opens you’ll see a left-side vertical menu and a top bar. Prim
 2. From toolbox → **Move & transform** → drag **Copy Data** into the True canvas.
 3. Rename to `Copy_To_Sink`.
 4. Source tab: Dataset → `ds_studentpractice`.
-⭐ 5. Sink tab: Dataset → `ds_student_sink` and set its dataset parameter `TargetFile` to dynamic: `@pipeline().parameters.TargetFile`.
+5. ⭐ Sink tab: Dataset → `ds_student_sink` and set its dataset parameter `TargetFile` to dynamic: `@pipeline().parameters.TargetFile`.
 6. (Optional) Mapping tab → Auto-mapping.
 
 
@@ -295,11 +295,11 @@ When ADF Studio opens you’ll see a left-side vertical menu and a top bar. Prim
 
 ## 🎯 1.9 Pipeline Variables & Set Variable
 
-⭐ 1. Click the empty pipeline canvas → on the right panel click **Variables** → Add:
+1. ⭐ Click the empty pipeline canvas → on the right panel click **Variables** → Add:
 
    * `FileSize` (String)
    * `Status` (String)
-⭐ 2. Edit inner canvas (If True) → from toolbox add **Set Variable** activity after `Copy_To_Sink`.
+2. ⭐ Edit inner canvas (If True) → from toolbox add **Set Variable** activity after `Copy_To_Sink`.
 
    * Rename to `Log_FileSize`.
    * Settings: Variable name `FileSize`, Value: dynamic content:
@@ -308,7 +308,7 @@ When ADF Studio opens you’ll see a left-side vertical menu and a top bar. Prim
 @string(activity('GetMeta_CheckFile').output.size)
 ```
 
-⭐ 3. Switch to the False tab and add **Set Variable** activity named `Set_Status_FileMissing`.
+3. ⭐ Switch to the False tab and add **Set Variable** activity named `Set_Status_FileMissing`.
 
    * Settings: Variable `Status`, Value: `"File Missing"`.
 
@@ -337,8 +337,8 @@ When ADF Studio opens you’ll see a left-side vertical menu and a top bar. Prim
 
 ## 🎯 2.1 Create Key Vault 
 
-⭐ 1. Azure Portal → **Create a resource** → search **Key Vault** → **Create**.
-⭐ 2. Fill the form:
+1. ⭐ Azure Portal → **Create a resource** → search **Key Vault** → **Create**.
+2. ⭐ Fill the form:
 
    * Subscription: Azure for Students
    * Resource group: `RGnew` (or your RG)
@@ -346,35 +346,35 @@ When ADF Studio opens you’ll see a left-side vertical menu and a top bar. Prim
    * Region: choose region (East US is fine)
    * Pricing tier: Standard
    * Soft-delete: Enabled is OK
-⭐ 3. Click **Review + create** → **Create**.
-⭐ 4. After deployment click **Go to resource**.
+3. ⭐ Click **Review + create** → **Create**.
+4. ⭐ After deployment click **Go to resource**.
 
 ## 🎯 2.2 Add a Secret 🛡️
 
 1. In Key Vault left menu → click **Secrets**.
 2. Click **+ Generate/Import**.
 3. Name: `storage-key`.
-⭐ 4. Value: paste the **Storage account Key** (from Storage Account → Access keys → Key1).
+4. ⭐ Value: paste the **Storage account Key** (from Storage Account → Access keys → Key1).
 5. Click **Create**.
 
 > 🔧 If you see an RBAC error when adding a secret, proceed to fix RBAC (next section).
 
 ## 🎯 2.3 Fix RBAC (if needed)🔧
 
-⭐ 1. In Key Vault → left menu → **Access control (IAM)**.
-⭐ 2. Click **+ Add** → **Add role assignment**.
-⭐ 3. Choose a role for your user like **Key Vault Administrator** or **Key Vault Secrets Officer** and assign it to your user account.
-⭐ 4. Click **Review + Assign**.
+1. ⭐ In Key Vault → left menu → **Access control (IAM)**.
+2. ⭐ Click **+ Add** → **Add role assignment**.
+3. ⭐ Choose a role for your user like **Key Vault Administrator** or **Key Vault Secrets Officer** and assign it to your user account.
+4. ⭐ Click **Review + Assign**.
 5. Wait 30–60 seconds and retry adding the secret.
 
 ## 🎯 2.4 Grant ADF access to Key Vault (RBAC mode)👤 🆔
 
 > 🛠️ If your Key Vault uses RBAC for access management, do this:
 
-⭐ 1. Key Vault → **Access control (IAM)** → **+ Add** → **Add role assignment**.
-⭐ 2. Search for role **Key Vault Secrets User** (or **Key Vault Reader** if not available).
-⭐ 3. Members → **Select members** → search for your Data Factory name (it will appear as a managed identity).
-⭐ 4. Select it → **Review + Assign**.
+1. ⭐Key Vault → **Access control (IAM)** → **+ Add** → **Add role assignment**.
+2. ⭐ Search for role **Key Vault Secrets User** (or **Key Vault Reader** if not available).
+3. ⭐ Members → **Select members** → search for your Data Factory name (it will appear as a managed identity).
+4. ⭐ Select it → **Review + Assign**.
 
 > 🛠️ If the Key Vault uses legacy Access Policies (older UI), you'd use Key Vault → Access policies → Add policy → select ADF managed identity and give **Get** and **List**.
 
@@ -427,9 +427,9 @@ Two common approaches:
 
 # 📕 Notes
 
-⭐ * Use Managed Identity for production — it is modern and secure.
-⭐ * Key Vault is primarily for secrets you don't want in plain text (SQL passwords, API keys, storage keys if you prefer key-based auth).
-⭐ * Save and publish often. Keep a Git branch for your ADF factory if you plan CI/CD later.
+* ⭐Use Managed Identity for production — it is modern and secure.
+* ⭐ Key Vault is primarily for secrets you don't want in plain text (SQL passwords, API keys, storage keys if you prefer key-based auth).
+* ⭐ Save and publish often. Keep a Git branch for your ADF factory if you plan CI/CD later.
 
 ---
 
