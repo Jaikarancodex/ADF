@@ -120,3 +120,269 @@ Great for:
 - Bulk operations  
 - Scheduled tasks  
 
+---
+
+# 💥 1.4 Azure Storage Account (Types)
+Azure Storage Account offers multiple storage services suited for different workloads.
+
+---
+
+## ✔  1.4.1 Blob Storage
+Used for storing **unstructured data** such as:
+- Images, videos  
+- CSV, JSON, logs  
+- Backups  
+- Data Lake files  
+
+Best for analytics, large-scale storage, and data lake solutions.
+
+---
+
+## ✔ 1.4.2 File Storage
+Cloud-based **SMB file shares**.
+
+Use cases:
+- Shared file systems for VMs  
+- On-prem file server migration  
+- Lift-and-shift applications needing shared storage  
+
+---
+
+## ✔ 1.4.3 Table Storage
+A NoSQL **key-value** store.
+
+Use cases:
+- IoT metadata  
+- App configuration  
+- Semi-structured datasets  
+
+---
+
+## ✔  1.4.4 Queue Storage
+Message queueing for asynchronous communication.
+
+Use cases:
+- Background job processing  
+- Event-based systems  
+- Decoupling between app components  
+
+---
+
+# 💥 1.5 Azure Data Factory (ADF)
+
+## ✔  Introduction to ADF
+ADF is Azure’s **ETL / ELT orchestration tool** that:
+- Moves data  
+- Transforms data  
+- Connects cloud, on-prem, and SaaS systems  
+
+---
+
+## ✔  Key Components
+
+### **Pipelines**
+A workflow container holding activities.
+
+### **Datasets**
+Represents the **data source/structure** (CSV file, SQL table, JSON, etc.).
+
+### **Linked Services**
+Connection configuration for:
+- Databases  
+- Storage  
+- APIs  
+- SaaS apps  
+
+---
+
+# 💥 1.6 Azure Key Vault
+
+## ✔  1.6.1 Securely Store and Manage Sensitive Information
+Stores:
+- Secrets  
+- Keys  
+- Certificates  
+
+Prevents hardcoding sensitive values in:
+- Apps  
+- Pipelines  
+- Functions  
+
+Integrates with ADF, AKV, Functions, SQL, etc.
+
+---
+
+# 💥 1.7 Integration with Azure Services
+
+## ✔  1.7.1 Dataset & Linked Service
+- **Linked Service** → connection info (e.g., SQL connection)  
+- **Dataset** → representation of data (table, file)
+
+Example:  
+Linked Service → Azure SQL  
+Dataset → Sales table inside it.
+
+---
+
+## ✔  1.7.2 Integration Runtimes (IR)
+ADF uses IR to perform data movement.
+
+Types:
+- **Azure IR** – cloud to cloud  
+- **Self-hosted IR** – on-prem to cloud  
+- **SSIS IR** – for SSIS package execution  
+
+---
+
+## ✔  1.7.3 Triggers & Monitoring
+
+### Triggers
+Start pipelines based on:
+- Schedule  
+- Event  
+- Manual  
+
+### Monitoring
+You can view:
+- Pipeline run history  
+- Logs  
+- Failures  
+- Data movement statistics  
+
+---
+
+# 💥 1.8 Activities in ADF
+Activities are **tasks** inside a pipeline. A pipeline can contain one or many activities that run in sequence or parallel.
+
+---
+
+# 💥 1.8.1 Data Movement Activity
+Handles **copying data** from a source to a destination (sink).
+
+## ✔ 1.8.1.1 Azure Blob Storage Source/Sink
+Used when reading/writing:
+- CSV  
+- JSON  
+- Parquet  
+- Unstructured files in Blob Storage  
+
+Example:  
+Copy data from **Blob Storage → Data Lake**.
+
+## ✔ 1.8.1.2 Azure SQL Database Source/Sink
+Read or write directly to SQL tables.
+
+Examples:
+- Load CSV → SQL table  
+- Export SQL table → Blob or Data Lake  
+
+---
+
+# 💥 1.8.2 Execution Control Activities
+Manage execution and logic inside pipelines.
+
+## ✔ 1.8.2.1 Execute Pipeline Activity
+Runs another pipeline from inside the current pipeline.
+
+Use case:  
+Main pipeline → calls **child ETL pipelines**.
+
+---
+
+## ✔ 1.8.2.2 If Condition Activity
+Runs activities **based on a condition** (true/false).
+
+Example:  
+If file exists → copy it  
+Else → send an alert
+
+---
+
+## ✔ 1.8.2.3 ForEach Activity
+Loops over a list (files, tables, values) and executes activities inside.
+
+Example:  
+Loop through **all files in a folder** and copy each file.
+
+---
+
+## ✔ 1.8.2.4 Web Activity
+Sends HTTP calls to APIs.
+
+Use cases:
+- Trigger external REST API  
+- Send notifications  
+- Call Logic App  
+- Start external jobs  
+
+---
+
+# 💥 1.8.3 Control Flow Activities
+Used to control how pipelines behave.
+
+## ✔ 1.8.3.1 Wait Activity
+Pauses pipeline execution for a set time.
+
+Example:  
+Wait 30 seconds before calling next API.
+
+---
+
+## ✔ 1.8.3.2 Until Activity
+Repeats execution **until a condition becomes true**.
+
+Example:  
+Check if a file has arrived.  
+If not → wait 1 minute → check again.
+
+---
+
+## ✔ 1.8.3.3 Get Metadata Activity
+Fetches metadata like:
+- File size  
+- Last modified date  
+- Folder content  
+
+Example:  
+Get file size before copying it.
+
+---
+
+## ✔ 1.8.3.4 Lookup Activity
+Executes a query or reads JSON/CSV metadata.
+
+Example:  
+Fetch **list of tables** to loop over in ForEach.
+
+---
+
+## ✔ 1.8.3.5 Stored Procedure Activity
+Executes a stored procedure inside SQL Database.
+
+Example:  
+Run `usp_CleanSalesData` before copying data.
+
+---
+
+# 💥 1.8.4 Pipelines & Triggers
+
+## ✔ Pipelines
+A pipeline is a **workflow** containing activities.
+
+Example:  
+Daily ETL pipeline → Copy → Transform → Load → Notification.
+
+---
+
+## ✔ Triggers
+Triggers **start** the pipeline.
+
+Types:
+- **Schedule Trigger** – run daily/hourly  
+- **Event Trigger** – file arrival  
+- **Manual Trigger** – run anytime from portal  
+
+Example:  
+Run pipeline every day at 1 AM.
+
+
