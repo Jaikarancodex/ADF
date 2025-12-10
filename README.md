@@ -385,4 +385,98 @@ Types:
 Example:  
 Run pipeline every day at 1 AM.
 
+---
+
+# 💥 1.9 Azure Notebooks
+Azure Notebooks allow interactive execution of:
+- **Python**
+- **SQL**
+- **Scala**
+
+Used for:
+- Data exploration  
+- ETL development  
+- Machine learning  
+- Interactive Spark-based analysis  
+
+---
+
+##  ✔  1.9.1 Overview of Azure Databricks Notebooks Integration
+Databricks notebooks integrate seamlessly with Azure services.
+
+Features:
+- Unified workspace for SQL, Python, Scala  
+- Autoscaling Spark clusters  
+- Easy integration with:
+  - Azure Data Factory  
+  - Azure Storage / ADLS  
+  - Azure SQL  
+  - Azure Key Vault  
+
+### ✔ Example  
+ADF Pipeline → Databricks Notebook Activity → Spark transforms input CSVs → Writes cleaned data to ADLS.
+
+---
+
+##  ✔  1.9.2 Notebook Orchestration
+ADF orchestrates Databricks notebooks by:
+- Passing parameters  
+- Triggering cluster execution  
+- Monitoring notebook runs  
+- Handling retries and failure logic  
+
+### ✔ Example Flow  
+1. File arrives in ADLS → Event Trigger  
+2. ADF executes Databricks Notebook  
+3. Notebook cleans data and outputs Parquet  
+4. ADF loads the result into Azure SQL or another sink  
+
+---
+
+# 💥 1.10 Azure DevOps, CI/CD Integration
+Azure DevOps enables **automation of builds, tests, and deployments**.
+
+Components:
+- **Repos** → source code  
+- **Pipelines** → CI/CD automation  
+- **Artifacts** → package storage  
+- **Boards** → agile management  
+
+---
+
+## 1.10.1 Continuous Integration & Continuous Deployment (CI/CD)
+
+###  ✔  Continuous Integration (CI)
+Runs automatically when code is pushed:
+- Builds the application  
+- Runs test cases  
+- Validates changes  
+- Generates deployment-ready packages  
+
+Goal: Catch issues early.
+
+---
+
+###  ✔  Continuous Deployment (CD)
+Automatically deploys application or infrastructure to environments like:
+- Dev  
+- Test  
+- Staging  
+- Production  
+
+### ✔ Example CI/CD Flow  
+1. Developer pushes code to Git repo  
+2. **CI Pipeline** builds & tests  
+3. **CD Pipeline** deploys:
+   - ADF pipelines  
+   - Function Apps  
+   - Databricks notebooks  
+   - ARM/Bicep/Terraform resources  
+
+Benefits:
+- Faster releases  
+- Fewer manual errors  
+- Fully automated deployments  
+
+
 
